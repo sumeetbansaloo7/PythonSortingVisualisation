@@ -2,12 +2,8 @@ from tkinter import *
 from tkinter import ttk
 import random  # for creating new random array
 from bubbleSort import bubblesort
+from quickSort import quicksort
 
-# window properties
-root = Tk()
-root.title("Sorting Visuallisation")
-root.maxsize(900, 600)
-root.config(bg="black")
 # variables
 algoSelected = StringVar()
 array = []
@@ -50,9 +46,20 @@ def drawArray(array, colorArray):
 def startAlgorithm():
     global array
     sleeptime = float(speedScale.get())
-    bubblesort(array, drawArray, sleeptime)
+    if(algoSelected.get() == "Bubble Sort"):
+        bubblesort(array, drawArray, sleeptime)
+        drawArray(array, ['green' for x in range(len(array))])
+    else:
+        quicksort(array, 0, len(array)-1, drawArray, sleeptime)
+        drawArray(array, ['green' for x in range(len(array))])
 
 
+#! ui using tkinter
+# window properties
+root = Tk()
+root.title("Sorting Visuallisation")
+root.maxsize(900, 600)
+root.config(bg="black")
 # main ui and canvas for visualisation
 UI_frame = Frame(root, width=900, height=200, bg="grey")
 UI_frame.grid(row=0, column=0, padx=10, pady=5)
@@ -74,8 +81,9 @@ Button(UI_frame, text="Create Array", command=Generate,
 # second row
 Label(UI_frame, text="Algorithm: ", bg="grey").grid(
     row=1, column=0, padx=5, pady=5, sticky=W)
+#! algos for sorting
 algoMenu = ttk.Combobox(UI_frame, textvariable=algoSelected, values=[
-                        "Bubble Sort", "Merge Sort"])
+                        "Bubble Sort", "Quick Sort"])
 algoMenu.grid(row=1, column=1, padx=5, pady=5)
 algoMenu.current(0)
 speedScale = Scale(UI_frame, from_=0.1, to=1.0, length=150, digits=2,
