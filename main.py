@@ -3,7 +3,14 @@ from tkinter import ttk
 import random  # for creating new random array
 from bubbleSort import bubblesort
 from quickSort import quicksort
+from mergeSort import mergesort
 
+#! ui using tkinter
+# window properties
+root = Tk()
+root.title("Sorting Visuallisation")
+root.maxsize(900, 600)
+root.config(bg="black")
 #!global variables
 algoSelected = StringVar()
 array = []
@@ -54,14 +61,11 @@ def startAlgorithm():
     elif algoSelected.get() == "Quick Sort":
         quicksort(array, 0, len(array)-1, drawArray, sleeptime)
         drawArray(array, ['green' for x in range(len(array))])
+    elif algoSelected.get() == "Merge Sort":
+        mergesort(array, 0, len(array)-1, drawArray, sleeptime)
+        drawArray(array, ['green' for x in range(len(array))])
 
 
-#! ui using tkinter
-# window properties
-root = Tk()
-root.title("Sorting Visuallisation")
-root.maxsize(900, 600)
-root.config(bg="black")
 # main ui and canvas for visualisation
 UI_frame = Frame(root, width=900, height=200, bg="grey")
 UI_frame.grid(row=0, column=0, padx=10, pady=5)
@@ -85,7 +89,7 @@ Label(UI_frame, text="Algorithm: ", bg="grey").grid(
     row=1, column=0, padx=5, pady=5, sticky=W)
 #! algos for sorting
 algoMenu = ttk.Combobox(UI_frame, textvariable=algoSelected, values=[
-                        "Bubble Sort", "Quick Sort"])
+                        "Bubble Sort", "Quick Sort", "Merge Sort"])
 algoMenu.grid(row=1, column=1, padx=5, pady=5)
 algoMenu.current(0)
 speedScale = Scale(UI_frame, from_=0.1, to=1.0, length=150, digits=2,
