@@ -4,9 +4,11 @@ import random  # for creating new random array
 from bubbleSort import bubblesort
 from quickSort import quicksort
 
-# variables
+#!global variables
 algoSelected = StringVar()
 array = []
+
+#! functions
 
 
 def Generate():
@@ -49,7 +51,7 @@ def startAlgorithm():
     if(algoSelected.get() == "Bubble Sort"):
         bubblesort(array, drawArray, sleeptime)
         drawArray(array, ['green' for x in range(len(array))])
-    else:
+    elif algoSelected.get() == "Quick Sort":
         quicksort(array, 0, len(array)-1, drawArray, sleeptime)
         drawArray(array, ['green' for x in range(len(array))])
 
