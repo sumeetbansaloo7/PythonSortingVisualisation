@@ -4,6 +4,8 @@ import random  # for creating new random array
 from bubbleSort import bubblesort
 from quickSort import quicksort
 from mergeSort import mergesort
+from insertionSort import insertionsort
+from selectionSort import selectionsort
 
 #! ui using tkinter
 # window properties
@@ -64,6 +66,12 @@ def startAlgorithm():
     elif algoSelected.get() == "Merge Sort":
         mergesort(array, 0, len(array)-1, drawArray, sleeptime)
         drawArray(array, ['green' for x in range(len(array))])
+    elif algoSelected.get() == "Insertion Sort":
+        insertionsort(array, drawArray, sleeptime)
+        drawArray(array, ['green' for x in range(len(array))])
+    elif algoSelected.get() == "Selection Sort":
+        selectionsort(array, drawArray, sleeptime)
+        drawArray(array, ['green' for x in range(len(array))])
 
 
 # main ui and canvas for visualisation
@@ -89,7 +97,7 @@ Label(UI_frame, text="Algorithm: ", bg="grey").grid(
     row=1, column=0, padx=5, pady=5, sticky=W)
 #! algos for sorting
 algoMenu = ttk.Combobox(UI_frame, textvariable=algoSelected, values=[
-                        "Bubble Sort", "Quick Sort", "Merge Sort"])
+                        "Bubble Sort", "Quick Sort", "Merge Sort", "Insertion Sort", "Selection Sort"])
 algoMenu.grid(row=1, column=1, padx=5, pady=5)
 algoMenu.current(0)
 speedScale = Scale(UI_frame, from_=0.1, to=1.0, length=150, digits=2,

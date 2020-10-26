@@ -6,8 +6,10 @@ def bubblesort(array, drawArray, sleeptime):
     for i in range(length-1):
         for j in range(length-1):
             if(array[j] > array[j+1]):
-                array[j], array[j+1] = array[j+1], array[j]
                 drawArray(array, colours(length, j, j+1))
+                time.sleep(sleeptime)
+                array[j], array[j+1] = array[j+1], array[j]
+                drawArray(array, colours(length, j+1, j))
                 time.sleep(sleeptime)
     # drawArray(array, ['green' for x in range(len(array))])
 
